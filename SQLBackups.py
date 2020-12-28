@@ -49,8 +49,6 @@ def backupDB(dbName):
             LOG.debug('Failed to backup {} ERROR: {}'.format(dbName, e))
             return False
     
-    if not result.check_returncode():
-        return False
     return fileName
 
 def deleteOld():
