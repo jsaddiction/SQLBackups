@@ -16,13 +16,14 @@ def getTimeStr():
     return time.strftime('%d-%b-%Y_%H:%M:%S')
 
 def getDatabases():
-    dbs = []
     result = subprocess.run(['mysql -u %s -p%s --silent -e "SHOW DATABASES"' % (DB_USER, DB_PASS)], 
         stdout=subprocess.PIPE, 
         stderr=subprocess.STDOUT,
         shell=True)
+
+    dbs = list(result.stdout)
     
-    LOG.debug(result.stdout.readlines())
+    LOG.debug(dbs)
     
     return dbs
 
