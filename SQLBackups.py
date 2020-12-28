@@ -22,7 +22,7 @@ def getDatabases():
         stderr=subprocess.STDOUT,
         shell=True)
     
-    LOG.debug(result)
+    LOG.debug(result.stdout)
     
     return dbs
 
