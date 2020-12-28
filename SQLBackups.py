@@ -25,6 +25,10 @@ def getDatabases():
         LOG.debug('Failed to get database list. Error: {}'.format(e))
         return []
 
+    if not result.returncode == 0:
+        LOG.debug('Failed to get database list. Error: incorrect credentials')
+        return []
+
     return result.stdout.decode('UTF-8').splitlines()
     
 
