@@ -39,7 +39,10 @@ def backupDB(dbName):
             return False
 
     with open(fileName,'w') as output:
-        result = subprocess.run(['mysqldump', '--user='+DB_USER, '--password='+DB_PASS, dbName], stdout=output, capture_output=True, shell=True)
+        result = subprocess.run(['mysqldump -u %s -p%s' % (DB_USER, DB_PASS), dbName],
+            stdout=output,
+            stderr=subprocess.STDOUT,
+            shell=True)
     
     if not result.check_returncode():
         return False
