@@ -38,6 +38,7 @@ def backupDB(dbName):
             LOG.warning('Could not create directory: {} Error: {}'.format(filePath, e))
             return False
 
+    LOG.debug('Attempting to dump {} to {}'.format(dbName, fileName))
     with open(fileName,'w') as output:
         result = subprocess.run(['mysqldump -u {} -p{} {}'.format(DB_USER, DB_PASS, dbName)],
             stdout=output,
