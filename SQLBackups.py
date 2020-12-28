@@ -17,8 +17,13 @@ def getTimeStr():
 
 def getDatabases():
     dbs = []
-    result = subprocess.run(['mysql', '-u', DB_USER, '-p', DB_PASS, '-e', 'SHOW DATABASES;'], stdout=output, capture_output=True, shell=True)
+    result = subprocess.run(['mysql', '-u', DB_USER, '-p', DB_PASS, '-e', 'SHOW DATABASES;'], 
+        stdout=subprocess.PIPE, 
+        stderr=subprocess.STDOUT,
+        shell=True)
+    
     LOG.debug(result)
+    
     return dbs
 
 def backupDB(dbName):
