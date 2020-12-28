@@ -25,10 +25,8 @@ def getDatabases():
         LOG.debug('Failed to get database list. Error: {}'.format(e))
         return []
 
-    if result.check_returncode():
-        return result.stdout.decode('UTF-8')
+    return result.stdout.decode('UTF-8')
     
-    return []
 
 def backupDB(dbName):
     filePath = os.path.abspath(os.path.join(BACKUP_DIR, dbName))
