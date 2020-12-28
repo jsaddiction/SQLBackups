@@ -44,14 +44,16 @@ def backupDB(dbName):
     LOG.debug('Attempting to dump {} to {}'.format(dbName, fileName))
     with open(fileName,'w') as output:
         try:
-            result = subprocess.run(['mysqldump -u {} -p{} {}'.format(DB_USER, DB_PASS, dbName)],
+            result = subprocess.run(['mysqldump', '-u'+DB_USER, '-p'+DB_PASS, '--silent', dbName],
                 stdout=output,
-                stderr=subprocess.STDOUT,
-                shell=True)
+                stderr=subprocess.STDOUT)
         except subprocess.CalledProcessError as e:
             LOG.debug('Failed to backup {} ERROR: {}'.format(dbName, e))
             return False
-    
+    if not result.returncode == 0:
+        LOG.debug('Failed to backup {} Error: {}'.format(dbName, result))
+        return False
+
     return fileName
 
 def deleteOld():
