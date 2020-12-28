@@ -65,17 +65,20 @@ def main():
         LOG.critical('Backup directory not found: {}'.format(BACKUP_DIR))
         sys.exit(1)
 
-    for db in getDatabases():
-        if not db in EXCLUDED_DBS:
-            result = backupDB(db)
-            if result:
-                LOG.info('Successfull Backup of {}'.format(result))
-            else:
-                LOG.warning('Failed to Backup {}'.format(db))
-        else:
-            LOG.debug('Skipping backup of excluded DB: {}'.format(db))
+    dbs = getDatabases()
+    LOG.debug('Database List type: Databases:'.format(type(dbs), dbs))
 
-    deleteOld()
+    # for db in getDatabases():
+    #     if not db in EXCLUDED_DBS:
+    #         result = backupDB(db)
+    #         if result:
+    #             LOG.info('Successfull Backup of {}'.format(result))
+    #         else:
+    #             LOG.warning('Failed to Backup {}'.format(db))
+    #     else:
+    #         LOG.debug('Skipping backup of excluded DB: {}'.format(db))
+
+    # deleteOld()
 
 
 if __name__ == '__main__':
