@@ -66,7 +66,7 @@ def main():
         sys.exit(1)
 
     dbs = getDatabases()
-    LOG.debug('Database List type: Databases:'.format(type(dbs), dbs))
+    LOG.debug('Database List type:{} Databases:{}'.format(type(dbs), dbs))
 
     # for db in getDatabases():
     #     if not db in EXCLUDED_DBS:
