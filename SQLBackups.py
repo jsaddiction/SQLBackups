@@ -17,16 +17,15 @@ def getTimeStr():
 
 def getDatabases():
     try:
-        result = subprocess.run(['mysql', '-u', DB_USER, '-p'+DB_PASS, '--silent', '-e', 'SHOW DATABASES'], 
+        result = subprocess.run(['mysql', '-u'+DB_USER, '-p'+DB_PASS, '--silent', '-e', 'SHOW DATABASES;'], 
             stdout=subprocess.PIPE, 
-            stderr=subprocess.STDOUT,
-            shell=True)
+            stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as e:
         LOG.debug('Failed to get database list. Error: {}'.format(e))
         return []
 
     if not result.returncode == 0:
-        LOG.debug('Failed to get database list. Error: incorrect credentials')
+        LOG.debug('Failed to get database list. Error: {}'.format(result))
         return []
 
     return result.stdout.decode('UTF-8').splitlines()
