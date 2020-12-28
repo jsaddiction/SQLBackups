@@ -21,7 +21,7 @@ def getDatabases():
         stderr=subprocess.STDOUT,
         shell=True)
 
-    dbs = list(result.stdout.decode('UTF-8'))
+    dbs = result.stdout.decode('UTF-8')
     
     LOG.debug(dbs)
     
