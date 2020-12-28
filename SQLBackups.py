@@ -40,10 +40,14 @@ def backupDB(dbName):
 
     LOG.debug('Attempting to dump {} to {}'.format(dbName, fileName))
     with open(fileName,'w') as output:
-        result = subprocess.run(['mysqldump -u {} -p{} {}'.format(DB_USER, DB_PASS, dbName)],
-            stdout=output,
-            stderr=subprocess.STDOUT,
-            shell=True)
+        try:
+            result = subprocess.run(['mysqldump -u {} -p{} {}'.format(DB_USER, DB_PASS, dbName)],
+                stdout=output,
+                stderr=subprocess.STDOUT,
+                shell=True)
+        except subprocess.CalledProcessError as e:
+            LOG.debug('Failed to backup {} ERROR: {}'.format(dbName, e))
+            return False
     
     if not result.check_returncode():
         return False
