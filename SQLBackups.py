@@ -21,11 +21,10 @@ def getDatabases():
         stderr=subprocess.STDOUT,
         shell=True)
 
-    dbs = result.stdout.decode('UTF-8')
+    if result.check_returncode():
+        return result.stdout.decode('UTF-8')
     
-    LOG.debug(dbs)
-    
-    return dbs
+    return []
 
 def backupDB(dbName):
     filePath = os.path.abspath(os.path.join(BACKUP_DIR, dbName))
