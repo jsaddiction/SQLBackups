@@ -25,7 +25,7 @@ def getDatabases():
         LOG.debug('Failed to get database list. Error: {}'.format(e))
         return []
 
-    return list(result.stdout.decode('UTF-8'))
+    return result.stdout.decode('UTF-8').readlines()
     
 
 def backupDB(dbName):
