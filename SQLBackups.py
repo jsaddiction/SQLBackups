@@ -17,7 +17,7 @@ def getTimeStr():
 
 def getDatabases():
     try:
-        result = subprocess.run(['mysql -u %s -p%s --silent -e "SHOW DATABASES"' % (DB_USER, DB_PASS)], 
+        result = subprocess.run(['mysql -u {} -p{} --silent -e "SHOW DATABASES"'.format(DB_USER, DB_PASS)], 
             stdout=subprocess.PIPE, 
             stderr=subprocess.STDOUT,
             shell=True)
@@ -39,7 +39,7 @@ def backupDB(dbName):
             return False
 
     with open(fileName,'w') as output:
-        result = subprocess.run(['mysqldump -u %s -p%s' % (DB_USER, DB_PASS), dbName],
+        result = subprocess.run(['mysqldump -u {} -p{} {}'.format(DB_USER, DB_PASS, dbName)],
             stdout=output,
             stderr=subprocess.STDOUT,
             shell=True)
