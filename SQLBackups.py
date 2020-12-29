@@ -57,7 +57,7 @@ def backupDB(dbName):
     return fileName
 
 def deleteOld():
-    oldestTime = time.time() - (KEEP_FOR_DAYS * 24 * 60 * 60)
+    oldestTime = time.time() - ((KEEP_FOR_DAYS * 24 * 60 * 60) + 10)
     for root, _, files in os.walk(BACKUP_DIR):
         for file in files:
             path = os.path.abspath(os.path.join(root, file))
