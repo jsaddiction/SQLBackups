@@ -28,8 +28,10 @@ def getDatabases():
         LOG.debug('Failed to get database list. Error: {}'.format(result))
         return []
 
-    return result.stdout.decode('UTF-8').splitlines()
-    
+    dbs = result.stdout.decode('UTF-8').splitlines()
+    LOG.debug('Databases found: {}'.format(dbs))
+
+    return dbs
 
 def backupDB(dbName):
     filePath = os.path.abspath(os.path.join(BACKUP_DIR, dbName))
@@ -63,7 +65,7 @@ def deleteOld():
             path = os.path.abspath(os.path.join(root, file))
             if os.path.isfile(path) and os.path.splitext(path)[-1] == '.sql':
                 if os.stat(path).st_mtime < oldestTime or os.stat(path).st_size == 0:
-                    LOG.info('Deleting {}'.format(os.path.basename(path)))
+                    LOG.debug('Deleting old backup {}'.format(os.path.basename(path)))
                     os.remove(path)
 
 def main():
@@ -75,7 +77,7 @@ def main():
         if not db in EXCLUDED_DBS:
             result = backupDB(db)
             if result:
-                LOG.info('Successfull Backup of {}'.format(result))
+                LOG.info('Backed up {}'.format(db))
             else:
                 LOG.warning('Failed to Backup {}'.format(db))
         else:
