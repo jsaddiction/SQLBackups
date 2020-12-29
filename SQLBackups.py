@@ -63,6 +63,7 @@ def deleteOld():
             path = os.path.abspath(os.path.join(root, file))
             if os.path.isfile(path) and os.path.splitext(path)[-1] == '.sql':
                 if os.stat(path).st_mtime < oldestTime or os.stat(path).st_size == 0:
+                    LOG.info('Deleting {}'.format(os.path.basename(path)))
                     os.remove(path)
 
 def main():
