@@ -9,6 +9,8 @@ __pycache__/
 # app files
 settings.ini
 logs/
+.devenv
+
 
 # Distribution / packaging
 .Python

@@ -1,0 +1,14 @@
+[LOGGING]
+level=debug
+to_file=false
+
+[SERVER]
+root_user=
+root_password=
+
+[DATABASE]
+excluded_databases=information_schema, performance_schema
+
+[BACKUPS]
+backup_dir=/backups
+keep_days=7

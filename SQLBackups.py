@@ -3,6 +3,9 @@ import sys
 import time
 import subprocess
 
+from selfupdate import pull
+pull()
+
 from core import (
     LOG,
     DB_USER,
