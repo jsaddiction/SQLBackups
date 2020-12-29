@@ -59,6 +59,7 @@ def backupDB(dbName):
     return fileName
 
 def deleteOld():
+    filesCleaned = 0
     oldestTime = time.time() - ((KEEP_FOR_DAYS * 24 * 60 * 60) + 10)
     for root, _, files in os.walk(BACKUP_DIR):
         for file in files:
@@ -66,7 +67,9 @@ def deleteOld():
             if os.path.isfile(path) and os.path.splitext(path)[-1] == '.sql':
                 if os.stat(path).st_mtime < oldestTime or os.stat(path).st_size == 0:
                     LOG.debug('Deleting old backup {}'.format(os.path.basename(path)))
+                    filesCleaned += 1
                     os.remove(path)
+    LOG.info('Cleaned up {} old backups.'.format(filesCleaned))
 
 def main():
     if not os.path.isdir(BACKUP_DIR):
