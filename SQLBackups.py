@@ -44,7 +44,7 @@ def backupDB(dbName):
     LOG.debug('Attempting to dump {} to {}'.format(dbName, fileName))
     with open(fileName,'w') as output:
         try:
-            result = subprocess.run(['mysqldump', '-u'+DB_USER, '-p'+DB_PASS, '--silent', dbName],
+            result = subprocess.run(['mysqldump', '--force', '--opt', '--skip-lock-tables', '-u'+DB_USER, '-p'+DB_PASS, '--databases '+dbName],
                 stdout=output,
                 stderr=subprocess.STDOUT)
         except subprocess.CalledProcessError as e:
