@@ -46,8 +46,7 @@ def backupDB(dbName):
         try:
             result = subprocess.run(['mysqldump', '--force', '--opt', '--skip-lock-tables', '-u'+DB_USER, '-p'+DB_PASS, '--databases '+dbName],
                 stdin=subprocess.PIPE,
-                stdout=output,
-                stderr=subprocess.STDOUT)
+                stdout=output)
         except subprocess.CalledProcessError as e:
             LOG.debug('Failed to backup {} ERROR: {}'.format(dbName, e))
             return False
