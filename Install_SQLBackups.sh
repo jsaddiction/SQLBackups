@@ -14,6 +14,7 @@ requirementsFile="${installDirectory}/requirements.txt"
 ## ubuntu/ Debian based part
 if [[ -n "$(command -v apt-get)" ]]; then
    apt update -yq
+   dpkg --configure -a
    install="git python3 python3-pip"
    for i in ${install}; do
        echo "********** INSTALLING $i **********"
