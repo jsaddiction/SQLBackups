@@ -33,7 +33,8 @@ def getDatabases():
         LOG.debug("Failed to get database list. Error: {}".format(result))
         return []
 
-    dbs = result.stdout.decode("UTF-8").splitlines()
+    raw_dbs = result.stdout.decode("UTF-8").splitlines()
+    dbs = raw_dbs[1:]
     LOG.debug("Databases found: {}".format(dbs))
 
     return dbs
