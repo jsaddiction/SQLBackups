@@ -21,7 +21,7 @@ def getTimeStr():
 def getDatabases():
     try:
         result = subprocess.run(
-            ["mysql", "-u" + DB_USER, "-p" + DB_PASS, "--silent", "-e", "SHOW DATABASES;"],
+            ["mysql", "--user=" + DB_USER, "--password=" + DB_PASS, "--silent", "-e", "SHOW DATABASES;"],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
         )
